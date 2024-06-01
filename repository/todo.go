@@ -12,7 +12,7 @@ type TodoRepository interface {
 	Delete(id string) error
 }
 
-type InMemoryTodo struct {
+type InMemoryTodoRepository struct {
 	todos []models.Todo
 }
 

@@ -13,15 +13,15 @@ type TodoRepository interface {
 }
 
 type InMemoryTodoRepository struct {
-	todos []models.Todo
+	Todos []models.Todo
 }
 
-func (r *InMemoryTodo) GetAll() []models.Todo {
-	return r.todos
+func (r *InMemoryTodoRepository) GetAll() []models.Todo {
+	return r.Todos
 }
 
-func (r *InMemoryTodo) GetByID(id string) (*models.Todo, error) {
-	for _, todo := range r.todos {
+func (r *InMemoryTodoRepository) GetByID(id string) (*models.Todo, error) {
+	for _, todo := range r.Todos {
 		if todo.ID == id {
 			return &todo, nil
 		}
@@ -29,25 +29,25 @@ func (r *InMemoryTodo) GetByID(id string) (*models.Todo, error) {
 	return nil, nil
 }
 
-func (r *InMemoryTodo) Add(todo *models.Todo) error {
-	r.todos = append(r.todos, *todo)
+func (r *InMemoryTodoRepository) Add(todo *models.Todo) error {
+	r.Todos = append(r.Todos, *todo)
 	return nil
 }
 
-func (r *InMemoryTodo) Update(todo *models.Todo) error {
-	for i, t := range r.todos {
+func (r *InMemoryTodoRepository) Update(todo *models.Todo) error {
+	for i, t := range r.Todos {
 		if t.ID == todo.ID {
-			r.todos[i] = *todo
+			r.Todos[i] = *todo
 			return nil
 		}
 	}
 	return nil
 }
 
-func (r *InMemoryTodo) Delete(id string) error {
-	for i, todo := range r.todos {
+func (r *InMemoryTodoRepository) Delete(id string) error {
+	for i, todo := range r.Todos {
 		if todo.ID == id {
-			r.todos = append(r.todos[:i], r.todos[i+1:]...)
+			r.Todos = append(r.Todos[:i], r.Todos[i+1:]...)
 			return nil
 		}
 	}
